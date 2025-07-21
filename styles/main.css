@@ -5,21 +5,29 @@
   --hud-layer: #112240;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--void);
   color: var(--chrome);
   font-family: 'Rajdhani', sans-serif;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  line-height: 1.6;
 }
 
 .cyber-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .hud-header {
@@ -34,21 +42,26 @@ body {
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 1px;
+  color: var(--chrome);
+}
+
+.neon {
+  color: var(--neon-core);
 }
 
 .terminal {
   text-align: center;
   padding: 5rem 1rem;
-  margin: 2rem 0;
+  margin: auto 0;
 }
 
 .neon-title {
   color: var(--neon-core);
-  font-size: 4rem;
+  font-size: 3.5rem;
   text-transform: uppercase;
   letter-spacing: 3px;
   text-shadow: 0 0 10px rgba(100, 255, 218, 0.7);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .subtitle {
@@ -56,6 +69,7 @@ body {
   max-width: 600px;
   margin: 0 auto 3rem;
   color: var(--chrome);
+  font-weight: 500;
 }
 
 .radar-scan {
@@ -97,11 +111,13 @@ body {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 .cyber-button:hover {
   background: rgba(100, 255, 218, 0.1);
   box-shadow: 0 0 15px var(--neon-core);
+  transform: translateY(-3px);
 }
 
 .hud-footer {
@@ -110,4 +126,20 @@ body {
   color: #8892b0;
   border-top: 1px solid var(--hud-layer);
   margin-top: auto;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .neon-title {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .radar-scan {
+    width: 150px;
+    height: 150px;
+  }
 }
