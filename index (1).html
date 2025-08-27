@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AegisAI — Autonomous Security</title>
+  <meta name="description" content="AegisAI — автономная охрана объектов: AI‑детекция, тепловизионное зрение, автономный патруль." />
+
+  <!-- Self-contained CSS (no frameworks) -->
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --bg-darker:#070a0e;
+      --glass:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.08);
+      --white:#f3f7ff;
+      --muted:#a8b3c7;
+      --turquoise:#26d1c3;
+      --orange:#ff7a3d;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .glass{background:var(--glass);backdrop-filter:saturate(140%) blur(10px);border:1px solid var(--border)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:14px 22px;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:.2s}
+    .btn-primary{background:var(--turquoise);color:#041417;border-color:transparent}
+    .btn-primary:hover{filter:brightness(1.07)}
+    .btn-secondary{background:transparent;color:var(--white)}
+    .btn-secondary:hover{background:rgba(255,255,255,.06)}
+    .badge{display:inline-block;border:1px solid var(--turquoise);color:var(--turquoise);padding:6px 10px;border-radius:10px;font-weight:600;font-size:12px;letter-spacing:.3px}
+    .shield-gradient{background:linear-gradient(90deg,var(--turquoise),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .text-glow{text-shadow:0 0 20px rgba(38,209,195,.25)}
+    header.nav{position:fixed;top:0;left:0;right:0;z-index:50}
+    header .inner{height:68px;display:flex;align-items:center;justify-content:space-between}
+    header .links a{opacity:.85}
+    header .links a:hover{color:var(--turquoise)}
+    main{padding-top:84px}
+    .hero{min-height:calc(100vh - 84px);display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+    .hero h1{font-family:Rajdhani,Inter,sans-serif;font-size: clamp(36px,6vw,86px);line-height:1.02;margin:0 0 10px}
+    .muted{color:var(--muted)}
+    .card{border-radius:22px}
+    .section{padding:80px 0}
+    .center{text-align:center}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;align-items:center}
+    .feature .icon{width:56px;height:56px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);margin-bottom:14px}
+    .footer{border-top:1px solid var(--border);padding:40px 0 24px}
+    .video-frame{position:relative;border-radius:22px;overflow:hidden}
+    .video-hud{position:absolute;inset:0;pointer-events:none}
+    .hud-pill{position:absolute;padding:10px 12px;border-radius:12px}
+    .hud-pill.glass{background:rgba(11,15,20,.65)}
+    .lang{border-radius:10px;padding:8px 12px;font-weight:600}
+    .bg-darker{background:var(--bg-darker)}
+    .particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .particle{position:absolute;width:2px;height:2px;background:rgba(255,255,255,.35);border-radius:50%;filter:blur(.4px);animation:float 12s linear infinite}
+    @keyframes float{
+      0%{transform:translateY(0) rotate(0)}
+      100%{transform:translateY(-120vh) rotate(180deg)}
+    }
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr;gap:28px}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Header -->
+  <header class="nav glass">
+    <div class="container inner">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="./aegis-logo.png" alt="AegisAI" width="40" height="40" />
+        <strong class="shield-gradient" style="font-family:Rajdhani,Inter,sans-serif;font-size:22px">AegisAI</strong>
+      </div>
+      <nav class="links" style="display:flex;gap:26px">
+        <a href="#features" data-i18n="nav.features">Возможности</a>
+        <a href="#demo" data-i18n="nav.demo">Демо</a>
+        <a href="#technology" data-i18n="nav.technology">Технологии</a>
+        <a href="#contact" data-i18n="nav.contact">Контакты</a>
+      </nav>
+      <button id="langToggle" class="glass lang">🇺🇸 EN</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="container hero">
+      <div>
+        <h1><span class="shield-gradient text-glow" data-i18n="hero.title">AegisAI</span><br>
+          <span data-i18n="hero.subtitle">Охранник будущего</span>
+        </h1>
+        <div class="badge text-glow" data-i18n="hero.badge">AI • Thermal Vision • Autonomy</div>
+        <p class="muted" style="font-size:18px;margin:18px 0 26px" data-i18n="hero.description">
+          Искусственный интеллект, тепловизионное оборудование и полная автономность в одном решении для охраны любых объектов.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a class="btn btn-primary" href="#contact" data-i18n="hero.requestDemo">Запросить демо</a>
+          <a class="btn btn-secondary glass" href="#features" data-i18n="hero.learnMore">Узнать больше</a>
+        </div>
+      </div>
+      <div class="glass card" style="padding:18px">
+        <div class="video-frame bg-darker">
+          <video style="width:100%;height:auto;display:block" autoplay muted loop playsinline>
+            <source src="./drone-demo.mp4" type="video/mp4">
+          </video>
+          <div class="video-hud">
+            <div class="hud-pill glass" style="top:12px;left:12px">
+              <span style="display:inline-flex;align-items:center;gap:8px;color:var(--turquoise);font:12px/1.1 ui-monospace, SFMono-Regular">
+                <span style="width:8px;height:8px;background:var(--turquoise);border-radius:50%;display:inline-block"></span>
+                PATROL ACTIVE
+              </span>
+            </div>
+            <div class="hud-pill glass" style="top:12px;right:12px;color:var(--turquoise);font:12px/1.1 ui-monospace">GPS: 55.7558° N, 37.6176° E</div>
+            <div class="hud-pill glass" style="bottom:12px;left:12px;color:var(--orange);font:12px/1.1 ui-monospace" data-i18n="hud.thermal">THERMAL: ACTIVE</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="center" style="margin-bottom:28px">
+          <h2 class="shield-gradient text-glow" style="font-family:Rajdhani,Inter,sans-serif;font-size: clamp(28px,4.6vw,54px);margin:0 0 10px" data-i18n="features.title">
+            Автономная охрана объектов
+          </h2>
+          <p class="muted" style="font-size:18px" data-i18n="features.subtitle">Революционные технологии для максимальной безопасности</p>
+        </div>
+        <div class="grid-3">
+          <div class="glass card feature" style="padding:26px">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7v6c0 5.6 3.8 10.7 10 12 6.2-1.3 10-6.4 10-12V7l-10-5Z" fill="var(--turquoise)"/></svg></div>
+            <h3 style="margin:8px 0 6px;color:var(--turquoise)" data-i18n="features.aiSecurity.title">AI Security</h3>
+            <p class="muted" data-i18n="features.aiSecurity.description">AegisAI анализирует видеопоток и обнаруживает нарушителей в реальном времени</p>
+          </div>
+          <div class="glass card feature" style="padding:26px">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5S21.3 16.4 23 12C21.3 7.6 17 4.5 12 4.5Zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z" fill="var(--orange)"/></svg></div>
+            <h3 style="margin:8px 0 6px;color:var(--orange)" data-i18n="features.thermalVision.title">Thermal Vision</h3>
+            <p class="muted" data-i18n="features.thermalVision.description">Инфракрасная камера позволяет видеть в темноте и сквозь дым</p>
+          </div>
+          <div class="glass card feature" style="padding:26px">
+            <div class="icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M19 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM9 17H7V10h2v7Zm4 0h-2V7h2v10Zm4 0h-2v-4h2v4Z" fill="var(--turquoise)"/></svg></div>
+            <h3 style="margin:8px 0 6px;color:var(--turquoise)" data-i18n="features.autonomy.title">Autonomy</h3>
+            <p class="muted" data-i18n="features.autonomy.description">Полное патрулирование и оповещения без участия человека</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo -->
+    <section id="demo" class="section bg-darker">
+      <div class="container center">
+        <h2 class="shield-gradient text-glow" style="font-family:Rajdhani,Inter,sans-serif;font-size: clamp(28px,4.6vw,54px);margin:0 0 18px" data-i18n="demo.title">
+          Демонстрация возможностей
+        </h2>
+        <div class="glass card" style="padding:22px;max-width:980px;margin:0 auto">
+          <div class="video-frame">
+            <video style="width:100%;height:auto;border-radius:16px" controls poster="./aegis-logo.png">
+              <source src="./drone-demo.mp4" type="video/mp4">
+            </video>
+            <div class="video-hud">
+              <div class="hud-pill glass" style="top:12px;left:12px"><span style="color:var(--turquoise);font:12px ui-monospace">LIVE PATROL</span></div>
+              <div class="hud-pill glass" style="bottom:12px;right:12px"><span style="color:var(--turquoise);font:12px ui-monospace">STATUS: SECURE</span></div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;justify-content:center;margin-top:16px">
+            <a class="btn btn-primary" href="./drone-demo.mp4" data-i18n="demo.watchDemo">Смотреть демо</a>
+            <a class="btn btn-secondary glass" href="#technology" data-i18n="demo.learnMore">Подробнее</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology -->
+    <section id="technology" class="section">
+      <div class="container grid-2">
+        <div>
+          <h2 class="shield-gradient text-glow" style="font-family:Rajdhani,Inter,sans-serif;font-size: clamp(28px,4.6vw,54px);margin:0 0 18px" data-i18n="technology.title">
+            Передовые технологии AegisAI
+          </h2>
+          <div class="glass card" style="padding:18px;margin-bottom:14px;display:flex;gap:14px;align-items:flex-start">
+            <div style="color:var(--orange)">★</div>
+            <div>
+              <h3 style="margin:0 0 6px;color:var(--orange)" data-i18n="technology.aiDetection.title">AI Detection</h3>
+              <p class="muted" data-i18n="technology.aiDetection.description">Мгновенное распознавание подозрительной активности</p>
+            </div>
+          </div>
+          <div class="glass card" style="padding:18px;margin-bottom:14px;display:flex;gap:14px;align-items:flex-start">
+            <div style="color:var(--turquoise)">●</div>
+            <div>
+              <h3 style="margin:0 0 6px;color:var(--turquoise)" data-i18n="technology.thermalImaging.title">Thermal Imaging</h3>
+              <p class="muted" data-i18n="technology.thermalImaging.description">Круглосуточное отслеживание в любых условиях</p>
+            </div>
+          </div>
+          <div class="glass card" style="padding:18px;display:flex;gap:14px;align-items:flex-start">
+            <div style="color:var(--turquoise)">◆</div>
+            <div>
+              <h3 style="margin:0 0 6px;color:var(--turquoise)" data-i18n="technology.gpsTracking.title">GPS Tracking</h3>
+              <p class="muted" data-i18n="technology.gpsTracking.description">Интеграция с картами в реальном времени</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass card" style="padding:28px;justify-self:center">
+          <div style="width:min(380px,90vw);height:min(380px,90vw);display:flex;align-items:center;justify-content:center;background:var(--bg-darker);border-radius:20px;position:relative;overflow:hidden">
+            <img src="./aegis-logo.png" alt="AegisAI Drone Technology" style="width:46%;opacity:.85;animation:floatY 6s ease-in-out infinite">
+            <div style="position:absolute;bottom:12px;left:12px;right:12px;text-align:center;color:var(--turquoise);font-weight:700">Advanced Drone System</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="section bg-darker">
+      <div class="container center">
+        <h2 style="font-family:Rajdhani,Inter,sans-serif;font-size: clamp(36px,6vw,82px);line-height:1.04;margin:0 0 10px">
+          <span class="shield-gradient text-glow" data-i18n="cta.title1">AegisAI.</span><br>
+          <span data-i18n="cta.title2">Autonomous Security.</span><br>
+          <span data-i18n="cta.title3">Redefined.</span>
+        </h2>
+        <p class="muted" style="font-size:20px;max-width:760px;margin:10px auto 24px" data-i18n="cta.subtitle">
+          Следующее поколение автономной охраны. Готово к интеграции.
+        </p>
+        <a class="btn btn-primary" href="mailto:info@aegisai.com" data-i18n="cta.button">Запросить консультацию</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container" style="display:grid;gap:18px;grid-template-columns:1fr auto 1fr;align-items:center">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="./aegis-logo.png" width="36" height="36" alt="AegisAI">
+        <strong class="shield-gradient" style="font-family:Rajdhani,Inter,sans-serif">AegisAI</strong>
+      </div>
+      <nav style="display:flex;gap:18px;justify-content:center">
+        <a href="#features" data-i18n="nav.features">Возможности</a>
+        <a href="#demo" data-i18n="nav.demo">Демо</a>
+        <a href="#technology" data-i18n="nav.technology">Технологии</a>
+      </nav>
+      <div style="display:flex;gap:10px;justify-content:end">
+        <a class="glass btn btn-secondary" href="https://t.me/aegisai" target="_blank" rel="noopener">Telegram</a>
+        <a class="glass btn btn-secondary" href="mailto:info@aegisai.com">Email</a>
+      </div>
+    </div>
+    <div class="container" style="text-align:center;color:var(--muted);margin-top:18px">
+      <small data-i18n="footer.copyright">© 2024 AegisAI. Все права защищены.</small>
+    </div>
+  </footer>
+
+  <script>
+    // Particles
+    (function(){
+      const root = document.getElementById('particles');
+      const count = 60;
+      const w = window.innerWidth, h = window.innerHeight;
+      for (let i=0;i<count;i++){
+        const d = document.createElement('div');
+        d.className = 'particle';
+        const size = Math.random()*2+1;
+        d.style.width = d.style.height = size+'px';
+        d.style.left = Math.random()*w+'px';
+        d.style.top = (Math.random()*h + 80)+'px';
+        d.style.animationDuration = (8 + Math.random()*10)+'s';
+        d.style.opacity = 0.3 + Math.random()*0.5;
+        root.appendChild(d);
+      }
+    })();
+
+    // i18n dictionary
+    const dict = {
+      RU: {
+        "nav.features":"Возможности","nav.demo":"Демо","nav.technology":"Технологии","nav.contact":"Контакты",
+        "hero.title":"AegisAI","hero.subtitle":"Охранник будущего","hero.badge":"AI • Thermal Vision • Autonomy",
+        "hero.description":"Искусственный интеллект, тепловизионное оборудование и полная автономность в одном решении для охраны любых объектов.",
+        "hero.requestDemo":"Запросить демо","hero.learnMore":"Узнать больше",
+        "features.title":"Автономная охрана объектов","features.subtitle":"Революционные технологии для максимальной безопасности",
+        "features.aiSecurity.title":"AI Security","features.aiSecurity.description":"AegisAI анализирует видеопоток и обнаруживает нарушителей в реальном времени",
+        "features.thermalVision.title":"Thermal Vision","features.thermalVision.description":"Инфракрасная камера позволяет видеть в темноте и сквозь дым",
+        "features.autonomy.title":"Autonomy","features.autonomy.description":"Полное патрулирование и оповещения без участия человека",
+        "demo.title":"Демонстрация возможностей","demo.watchDemo":"Смотреть демо","demo.learnMore":"Подробнее",
+        "technology.title":"Передовые технологии AegisAI",
+        "technology.aiDetection.title":"AI Detection","technology.aiDetection.description":"Мгновенное распознавание подозрительной активности",
+        "technology.thermalImaging.title":"Thermal Imaging","technology.thermalImaging.description":"Круглосуточное отслеживание в любых условиях",
+        "technology.gpsTracking.title":"GPS Tracking","technology.gpsTracking.description":"Интеграция с картами в реальном времени",
+        "cta.title1":"AegisAI.","cta.title2":"Autonomous Security.","cta.title3":"Redefined.","cta.subtitle":"Следующее поколение автономной охраны. Готово к интеграции.","cta.button":"Запросить консультацию",
+        "footer.copyright":"© 2024 AegisAI. Все права защищены."
+      },
+      EN: {
+        "nav.features":"Features","nav.demo":"Demo","nav.technology":"Technology","nav.contact":"Contact",
+        "hero.title":"AegisAI","hero.subtitle":"Guardian of the Future","hero.badge":"AI • Thermal Vision • Autonomy",
+        "hero.description":"Artificial intelligence, thermal imaging and full autonomy in one solution for securing any sites.",
+        "hero.requestDemo":"Request Demo","hero.learnMore":"Learn More",
+        "features.title":"Autonomous Object Security","features.subtitle":"Revolutionary technologies for maximum security",
+        "features.aiSecurity.title":"AI Security","features.aiSecurity.description":"AegisAI analyzes video streams and detects intruders in real time",
+        "features.thermalVision.title":"Thermal Vision","features.thermalVision.description":"Infrared camera allows you to see in the dark and through smoke",
+        "features.autonomy.title":"Autonomy","features.autonomy.description":"Complete patrolling and alerts without human intervention",
+        "demo.title":"Capabilities Demonstration","demo.watchDemo":"Watch Demo","demo.learnMore":"Learn More",
+        "technology.title":"Advanced AegisAI Technologies",
+        "technology.aiDetection.title":"AI Detection","technology.aiDetection.description":"Instant recognition of suspicious activity",
+        "technology.thermalImaging.title":"Thermal Imaging","technology.thermalImaging.description":"24/7 tracking in any conditions",
+        "technology.gpsTracking.title":"GPS Tracking","technology.gpsTracking.description":"Real-time map integration",
+        "cta.title1":"AegisAI.","cta.title2":"Autonomous Security.","cta.title3":"Redefined.","cta.subtitle":"Next generation autonomous security. Ready for integration.","cta.button":"Request Consultation",
+        "footer.copyright":"© 2024 AegisAI. All rights reserved."
+      }
+    };
+
+    // Language toggle
+    let current = "RU";
+    const btn = document.getElementById('langToggle');
+    function applyLang(lang){
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if (dict[lang][key]) el.textContent = dict[lang][key];
+      });
+      btn.textContent = lang === "RU" ? "🇺🇸 EN" : "🇷🇺 RU";
+    }
+    btn.addEventListener('click', ()=>{
+      current = current === "RU" ? "EN" : "RU";
+      applyLang(current);
+    });
+    // init
+    applyLang(current);
+  </script>
+</body>
+</html>
