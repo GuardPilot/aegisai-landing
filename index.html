@@ -9,6 +9,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AegisAI – Autonomous Security</title>
+  <meta name="description" content="AegisAI builds autonomous AI-powered security drones." />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href='data:application/manifest+json,{"name":"AegisAI","short_name":"AegisAI","start_url":".","display":"standalone","background_color":"#0a0a0a","theme_color":"#0a0a0a","icons":[{"src":"data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%2300fff7%22/%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml"}]}' />
   <style>
     body{margin:0;font-family:Inter,sans-serif;background:#0b0f1a;color:#e7edf5;line-height:1.6}
     h1,h2,h3{font-family:Rajdhani,sans-serif}
@@ -31,9 +40,67 @@
     details{background:rgba(255,255,255,.05);padding:14px;border-radius:8px;margin:8px 0}
     summary{cursor:pointer;font-weight:600}
     footer{padding:40px 20px;text-align:center;border-top:1px solid rgba(255,255,255,.1);color:#a8b0bf}
+    :root{
+      --bg:#0a0a0a;
+      --cyan:#00fff7;
+      --orange:#ff3b2e;
+      --text:#e0e0e0;
+      --font-head:'Rajdhani',sans-serif;
+      --font-body:'Inter',sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;scroll-behavior:smooth}
+    h1,h2,h3{font-family:var(--font-head)}
+    header{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:rgba(10,10,10,.8);backdrop-filter:blur(4px);z-index:1000;border-bottom:1px solid rgba(255,255,255,.1)}
+    .brand{font-weight:700;font-size:1.5rem;color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+    nav a{margin-left:20px;color:var(--text);text-decoration:none;position:relative}
+    nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--cyan);transition:.3s}
+    nav a:hover::after{width:100%;box-shadow:0 0 8px var(--cyan)}
+    #lang-toggle{margin-left:20px;background:transparent;border:1px solid var(--cyan);color:var(--cyan);padding:4px 10px;border-radius:4px;cursor:pointer}
+    section{padding:90px 20px}
+    .hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff}
+    .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;filter:brightness(40%)}
+    .hero .content{max-width:800px}
+    .hero h1{font-size:3rem;line-height:1.2;margin-bottom:20px}
+    .hero h1 span{color:var(--cyan);text-shadow:0 0 10px var(--cyan)}
+    .hero p{margin-bottom:30px;font-size:1.2rem}
+    .btn{padding:12px 24px;border:none;border-radius:4px;font-weight:600;cursor:pointer;margin:5px;transition:.3s}
+    .btn.cyan{background:var(--cyan);color:#000;box-shadow:0 0 10px var(--cyan)}
+    .btn.orange{background:var(--orange);color:#000;box-shadow:0 0 10px var(--orange)}
+    #about{background:linear-gradient(135deg,rgba(0,255,247,.1),rgba(255,59,46,.1));display:flex;flex-wrap:wrap;align-items:center}
+    #about .media,#about .text{flex:1 1 400px;padding:20px}
+    #about img{width:100%;border-radius:10px;box-shadow:0 0 20px rgba(0,255,247,.5)}
+    #demo .video-frame{max-width:800px;margin:0 auto;border:2px solid var(--cyan);padding:10px;border-radius:10px;box-shadow:0 0 15px var(--cyan)}
+    #demo video{width:100%;display:block;border-radius:6px}
+    #features .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:1000px;margin:auto}
+    .card{background:rgba(255,255,255,0.05);padding:20px;border-radius:10px;text-align:center;transition:.3s;border:1px solid rgba(255,255,255,0.1)}
+    .card:hover{box-shadow:0 0 15px var(--cyan);transform:translateY(-5px)}
+    .card svg{width:40px;height:40px;fill:var(--cyan);margin-bottom:10px}
+    #benefits .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:900px;margin:auto}
+    #faq details{max-width:800px;margin:10px auto;background:rgba(255,255,255,0.05);padding:15px;border-radius:8px;box-shadow:0 0 10px rgba(0,255,247,0.2)}
+    #faq summary{cursor:pointer;font-weight:600;position:relative;padding-left:20px}
+    #faq summary::before{content:'+';position:absolute;left:0;color:var(--cyan)}
+    #faq details[open] summary::before{content:'-'}
+    footer{background:#000;padding:40px 20px;text-align:center}
+    footer .logo{font-family:var(--font-head);color:var(--cyan);font-size:1.8rem;text-shadow:0 0 10px var(--cyan)}
+    footer a{color:var(--cyan);margin:0 10px;text-decoration:none}
+    #preloader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease}
+    #preloader.hide{opacity:0;pointer-events:none}
+    #preloader .logo{font-size:2rem;color:var(--cyan);animation:pulse 2s infinite;text-shadow:0 0 10px var(--cyan)}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,255,247,.7)}70%{box-shadow:0 0 20px 20px rgba(0,255,247,0)}100%{box-shadow:0 0 0 0 rgba(0,255,247,0)}}
+    .fade-in{opacity:0;transform:translateY(20px);transition:all .6s ease-out}
+    .fade-in.visible{opacity:1;transform:none}
+    @media(max-width:600px){.hero h1{font-size:2rem}}
   </style>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"AegisAI","url":"https://aegisai.example","logo":"https://aegisai.example/logo.png"}
+  </script>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Product","name":"AegisAI Autonomous Security Drone","brand":"AegisAI","description":"Autonomous AI-powered drones for security.","offers":{"@type":"Offer","availability":"https://schema.org/PreOrder"}}
+  </script>
 </head>
 <body>
+  <div id="preloader"><div class="logo">AegisAI</div></div>
   <header>
     <div class="brand">AegisAI</div>
     <nav>
@@ -42,8 +109,13 @@
       <a href="#demo">Demo</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#demo" data-i18n="nav.demo">Demo</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <button class="lang" id="langToggle">RU</button>
+    <button id="lang-toggle">RU</button>
   </header>
 
   <section class="hero" id="hero">
@@ -52,6 +124,12 @@
     <div class="cta">
       <a href="#contact" class="btn-primary">Request Demo</a>
       <a href="pitchdeck.pdf" class="btn-outline" download>Download Pitch Deck (PDF)</a>
+    <video autoplay muted loop playsinline src="https://cdn.coverr.co/videos/coverr-security-camera-1571/1080p.mp4?download=true"></video>
+    <div class="content fade-in">
+      <h1><span data-i18n="hero.title1">Autonomous</span> <span data-i18n="hero.title2">Security</span></h1>
+      <p data-i18n="hero.subtitle">AI-powered guardian drones for real-time protection.</p>
+      <a class="btn cyan" href="#contact" data-i18n="hero.cta1">Request Demo</a>
+      <a class="btn orange" href="pitchdeck.pdf" download data-i18n="hero.cta2">Download Pitch Deck</a>
     </div>
   </section>
 
@@ -60,6 +138,21 @@
     <p>AegisAI drones provide fully autonomous perimeter patrols powered by advanced AI. They detect intruders,
        analyze threats in real time, and instantly alert. Future upgrades will include non-lethal deterrents
        such as sirens and pepper spray.</p>
+    <div class="media fade-in"><img loading="lazy" src="https://via.placeholder.com/600x400?text=Drone" alt="drone"></div>
+    <div class="text fade-in">
+      <h2 data-i18n="about.title">About AegisAI</h2>
+      <p data-i18n="about.text">Our autonomous drones patrol, detect and respond without human intervention.</p>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 class="fade-in" data-i18n="demo.title">Demo Video</h2>
+    <p class="fade-in" data-i18n="demo.text">See the drone in action.</p>
+    <div class="video-frame fade-in">
+      <video id="demo-video" controls preload="none" poster="https://via.placeholder.com/800x450?text=Demo">
+        <source src="https://cdn.coverr.co/videos/coverr-drone-footage-1579/1080p.mp4?download=true" type="video/mp4" />
+      </video>
+    </div>
   </section>
 
   <section id="features">
@@ -68,14 +161,33 @@
       <div class="card">
         <h3>Autonomous Patrol</h3>
         <p>Unmanned 24/7 surveillance with smart routes.</p>
+    <h2 class="fade-in" data-i18n="features.title">Features</h2>
+    <div class="cards">
+      <div class="card fade-in">
+        <svg viewBox="0 0 24 24"><path d="M12 2l4 4-4 4-4-4z"/></svg>
+        <h3 data-i18n="features.f1">AI Patrol</h3>
+        <p data-i18n="features.f1d">Real-time threat detection.</p>
       </div>
       <div class="card">
         <h3>AI Threat Detection</h3>
         <p>Instant recognition of intruders with real-time alerts.</p>
+      <div class="card fade-in">
+        <svg viewBox="0 0 24 24"><path d="M12 22l-4-4 4-4 4 4z"/></svg>
+        <h3 data-i18n="features.f2">Thermal Vision</h3>
+        <p data-i18n="features.f2d">See in total darkness.</p>
       </div>
       <div class="card">
         <h3>Non-lethal Defense</h3>
         <p>Planned modules: pepper spray & sirens to deter threats safely.</p>
+      <div class="card fade-in">
+        <svg viewBox="0 0 24 24"><path d="M2 12l4-4 4 4-4 4z"/></svg>
+        <h3 data-i18n="features.f3">Autonomy</h3>
+        <p data-i18n="features.f3d">24/7 automatic patrol.</p>
+      </div>
+      <div class="card fade-in">
+        <svg viewBox="0 0 24 24"><path d="M22 12l-4 4-4-4 4-4z"/></svg>
+        <h3 data-i18n="features.f4">Secure Cloud</h3>
+        <p data-i18n="features.f4d">Encrypted data storage.</p>
       </div>
     </div>
   </section>
@@ -93,6 +205,11 @@
       <div class="card"><h3>Cost Efficient</h3><p>Reduce staffing expenses.</p></div>
       <div class="card"><h3>24/7 Operation</h3><p>No breaks, no fatigue, always active.</p></div>
       <div class="card"><h3>Scalable</h3><p>From homes to industrial zones.</p></div>
+    <h2 class="fade-in" data-i18n="benefits.title">Benefits</h2>
+    <div class="cards">
+      <div class="card fade-in"><h3 data-i18n="benefits.b1">Cost Efficient</h3><p data-i18n="benefits.b1d">Reduce staffing expenses.</p></div>
+      <div class="card fade-in"><h3 data-i18n="benefits.b2">Scalable</h3><p data-i18n="benefits.b2d">Deploy fleets fast.</p></div>
+      <div class="card fade-in"><h3 data-i18n="benefits.b3">Reliable</h3><p data-i18n="benefits.b3d">Works in any weather.</p></div>
     </div>
   </section>
 
@@ -102,20 +219,86 @@
     <details><summary>How is it controlled?</summary><p>Managed via secure mobile & web app.</p></details>
     <details><summary>Is it safe?</summary><p>Yes, designed with non-lethal deterrents and safety-first AI.</p></details>
     <details><summary>What’s next?</summary><p>Advanced AI capabilities and smart defense modules.</p></details>
+    <h2 class="fade-in" data-i18n="faq.title">FAQ</h2>
+    <details class="fade-in"><summary data-i18n="faq.q1">How long is battery life?</summary><p data-i18n="faq.a1">Up to 6 hours of continuous flight.</p></details>
+    <details class="fade-in"><summary data-i18n="faq.q2">Is data encrypted?</summary><p data-i18n="faq.a2">Yes, end-to-end encryption.</p></details>
+    <details class="fade-in"><summary data-i18n="faq.q3">Can it integrate with alarms?</summary><p data-i18n="faq.a3">Supports popular alarm systems.</p></details>
+    <details class="fade-in"><summary data-i18n="faq.q4">What about weather?</summary><p data-i18n="faq.a4">Operates in rain and snow.</p></details>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:chyikin99@gmail.com">chyikin99@gmail.com</a></p>
     <p>Telegram: <a href="https://t.me/JV_Guard" target="_blank">@JV_Guard</a></p>
+  <section id="contact" style="background:#111">
+    <div class="content" style="text-align:center;max-width:700px;margin:auto">
+      <h2 data-i18n="cta.title">Ready to secure your perimeter?</h2>
+      <p data-i18n="cta.subtitle">Next generation autonomous security. Ready for integration.</p>
+      <a class="btn cyan" href="mailto:info@aegisai.com" data-i18n="cta.btn">Request Consultation</a>
+    </div>
   </section>
 
   <footer>
     <p>© <span id="year"></span> AegisAI. All rights reserved.</p>
+    <div class="logo">AegisAI</div>
+    <p data-i18n="footer.contact">Contact: hello@aegisai.io</p>
+    <a href="pitchdeck.pdf" download data-i18n="footer.deck">Download Pitch Deck</a>
+    <div>
+      <a href="https://t.me/aegisai" aria-label="Telegram">Telegram</a>
+      <a href="https://github.com" aria-label="GitHub">GitHub</a>
+    </div>
+    <p data-i18n="footer.copy">© 2024 AegisAI</p>
   </footer>
 
   <script>
     document.getElementById("year").textContent=new Date().getFullYear();
+    const t={
+      en:{
+        nav:{about:'About',demo:'Demo',features:'Features',faq:'FAQ'},
+        hero:{title1:'Autonomous',title2:'Security',subtitle:'AI-powered guardian drones for real-time protection.',cta1:'Request Demo',cta2:'Download Pitch Deck'},
+        about:{title:'About AegisAI',text:'Our autonomous drones patrol, detect and respond without human intervention.'},
+        demo:{title:'Demo Video',text:'See the drone in action.'},
+        features:{title:'Features',f1:'AI Patrol',f1d:'Real-time threat detection.',f2:'Thermal Vision',f2d:'See in total darkness.',f3:'Autonomy',f3d:'24/7 automatic patrol.',f4:'Secure Cloud',f4d:'Encrypted data storage.'},
+        benefits:{title:'Benefits',b1:'Cost Efficient',b1d:'Reduce staffing expenses.',b2:'Scalable',b2d:'Deploy fleets fast.',b3:'Reliable',b3d:'Works in any weather.'},
+        faq:{title:'FAQ',q1:'How long is battery life?',a1:'Up to 6 hours of continuous flight.',q2:'Is data encrypted?',a2:'Yes, end-to-end encryption.',q3:'Can it integrate with alarms?',a3:'Supports popular alarm systems.',q4:'What about weather?',a4:'Operates in rain and snow.'},
+        cta:{title:'Ready to secure your perimeter?',subtitle:'Next generation autonomous security. Ready for integration.',btn:'Request Consultation'},
+        footer:{contact:'Contact: hello@aegisai.io',deck:'Download Pitch Deck',copy:'© 2024 AegisAI'}
+      },
+      ru:{
+        nav:{about:'О нас',demo:'Демо',features:'Возможности',faq:'FAQ'},
+        hero:{title1:'Автономная',title2:'Безопасность',subtitle:'Дроны-охранники с ИИ для мгновенной защиты.',cta1:'Запросить демо',cta2:'Скачать Pitch Deck'},
+        about:{title:'Об AegisAI',text:'Наши автономные дроны патрулируют, обнаруживают и реагируют без участия человека.'},
+        demo:{title:'Демонстрация',text:'Смотрите дрон в действии.'},
+        features:{title:'Возможности',f1:'AI-патруль',f1d:'Мгновенное обнаружение угроз.',f2:'Тепловизор',f2d:'Видит в полной темноте.',f3:'Автономность',f3d:'24/7 патруль без оператора.',f4:'Защищённое облако',f4d:'Шифрованное хранение данных.'},
+        benefits:{title:'Преимущества',b1:'Экономия',b1d:'Снижает расходы на охрану.',b2:'Масштабируемость',b2d:'Быстрое развёртывание флота.',b3:'Надёжность',b3d:'Работает при любой погоде.'},
+        faq:{title:'FAQ',q1:'Сколько держит батарея?',a1:'До 6 часов непрерывного полёта.',q2:'Данные шифруются?',a2:'Да, сквозное шифрование.',q3:'Интеграция с сигнализацией?',a3:'Поддержка популярных систем.',q4:'Как насчёт погоды?',a4:'Работает в дождь и снег.'},
+        cta:{title:'Готовы защитить периметр?',subtitle:'Следующее поколение автономной охраны. Готово к интеграции.',btn:'Запросить консультацию'},
+        footer:{contact:'Контакты: hello@aegisai.io',deck:'Скачать Pitch Deck',copy:'© 2024 AegisAI'}
+      }
+    };
+    let lang=localStorage.getItem('lang')||'en';
+    function applyLang(){
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const keys=el.dataset.i18n.split('.');
+        let txt=t[lang];
+        keys.forEach(k=>txt=txt[k]);
+        el.textContent=txt;
+      });
+      document.getElementById('lang-toggle').textContent=lang==='en'?'RU':'EN';
+      document.documentElement.lang=lang;
+    }
+    document.getElementById('lang-toggle').addEventListener('click',()=>{
+      lang=lang==='en'?'ru':'en';
+      localStorage.setItem('lang',lang);
+      applyLang();
+    });
+    window.addEventListener('load',()=>{
+      document.getElementById('preloader').classList.add('hide');
+      applyLang();
+    });
+    const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}}),{threshold:.2});
+    document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
   </script>
 </body>
+</html>
 </html>
